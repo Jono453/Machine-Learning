@@ -1,3 +1,3 @@
 # Machine-Learning
 
-Learning about robotic perception, Python machine learning and foraying into some Deep Learning as well with TensorFlow.
+Learning about Computer Vision, Machine Learning with Python and foraying into some Deep Learning as well with TensorFlow.

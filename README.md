@@ -4,3 +4,5 @@ Learning about Computer Vision, Machine Learning with Python and foraying into s
 
 - Udacity: Introduction into Machine Learning
 - Google ML Crash Course
+- EdX Robotics: Vision Intelligence and Machine Learning
+ 

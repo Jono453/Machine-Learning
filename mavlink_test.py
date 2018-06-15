@@ -1,8 +1,10 @@
-#mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --out 192.168.137.1:14550 --aircraft MyCopter
-#connecting to Pixhawk using serial connection with RaspberryPi
-#---out<ipadress>:14550 with ip address of computer running MissionPlanner
+#On PC
+#python mavlink_Test.py --console --map --out=<ipRaspberryPi>:14550
+#On Pi
+#sudo mavproxy.py --master=udpin:0.0.0.0:14550
+#this starts Mavproxy and sending of UDP packets
 
-#python droneKit.py
+#fot this run: python mavlink_test.py
 
 from dronekit import connect, VehicleMode, LocationGlobalRelative, LocationGlobal
 import time

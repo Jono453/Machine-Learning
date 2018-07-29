@@ -1,9 +1,7 @@
-#MNIST tutorial + integration onto Raspberry Pi
-
 import tensorflow as tf
-#print(tf.__version__)
+print(tf.__version__)
 
-from tf.example.tutorials.mnist import input_data
+from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 #data set contains 55000 data for training. 10000 for test and 5000 for validation
@@ -29,24 +27,23 @@ cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=
 #reduce_mean calculates the mean over all examples in batch
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
-sess = tf.InteracticeSession()
+sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()
 
 #rrun training steps
 #at each step in for loop. get batch of one hundred random points from train set. 
 for _ in range(1000):
   batch_xs, batch_ys = mnist.train.next_batch(100)
-  sess.run(train_step, fee_dict={x: batch_xs, y_: batch_ys})
+  sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
   
 #Evaluating model
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-accuracy = f.reduce_mean(tf.cast(correct_prediction, tf.float32))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+print("Accuracy was: ", sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 
-'''
-#Saving trained Keras CNN model for use on hardware
-from keras.models import load_model
-model.save('mnist_trained_model.h5')  # creates a HDF5 file
-#on Pi -> model = load_model('my_model.h5')
-'''
+#Saving trained CNN model for use on hardware
+save_path = saver.save(sess, "/tmp/model.ckpt")
+print("Model saved in path: %s" % save_path)
+print('Trained Model Saved.')
+

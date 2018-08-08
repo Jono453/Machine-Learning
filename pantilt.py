@@ -4,8 +4,6 @@ import cv2
 import numpy as np
 from picamera.array import PiRGBArray
 import smbus
-
-import smbus
 import time
 bus = smbus.SMBus(1)
 

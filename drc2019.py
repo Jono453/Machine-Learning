@@ -43,6 +43,10 @@ for image in imagePaths:
     img = cv2.imread(image)
     test_images.append(img)
 
+#1. calibrate camera
+
+#calib_image = cv2.imread('calib.jpg')
+
 #looping through the set of images in the DRC image folder
 for img in test_images:
     #cv2.imshow("test",img)
@@ -77,9 +81,6 @@ for img in test_images:
     cv2.imshow('color_path',detect)
 
     #2) Path planning and calculations
-
-
-
 
     #3) Steering and Acceleration on UGV
     #Talk to Arduino through i2c or WiringPi?

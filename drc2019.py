@@ -1,4 +1,5 @@
 #Script for computer vision for DRC 2019
+#Prototyping purposes
 
 import cv2 #using py2
 import numpy as np
@@ -73,17 +74,45 @@ for img in test_images:
     res3 = cv2.bitwise_and(img,img,mask = mask2)
 
     #combine both blue and yellow paths
+    kernel = np.ones((10,10),np.uint8)
+    dilate = cv2.dilate(img,kernel,iterations = 1)
+    
+    final_mask = cv2.addWeighted(mask,0.5,mask2,0.5,0.0)
     detect = cv2.addWeighted(res,0.5,res3,0.5,0.0)
 
-    cv2.imshow('original',img)
-    #cv2.imshow('res',res) #blue hsv detection
-    #cv2.imshow('yellow_result', res3)
-    cv2.imshow('color_path',detect)
+    #display computer vision pipeline - using matplotlib
+
+    cv2.imshow('Original',img)
+    cv2.imshow('Color Mask',final_mask)
+    cv2.imshow('Color Path',detect)
+    cv2.imshow('Dilation', dilate)
+
+    '''
+    fig = plt.figure(figsize = (8,8))
+
+    a = fig.add_subplot(2,2,1)
+    plt.imshow(img)
+    a.set_title('Original')
+
+    a = fig.add_subplot(2,2,2)
+    plt.imshow(detect)
+    a.set_title('color_path')
+
+    a = fig.add_subplot(2,2,3)
+    plt.imshow(final_mask)
+    a.set_title('color mask')
+
+    a = fig.add_subplot(2,2,4)
+    plt.imshow(dilate)
+    a.set_title('path_dilated')
+
+    plt.show()
+    '''
+
+
 
     #2) Path planning and calculations
-
     #3) Steering and Acceleration on UGV
-    #Talk to Arduino through i2c or WiringPi?
 
 
     cv2.waitKey(0)
